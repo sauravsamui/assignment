@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<style>
+    .product {
+        width: 80%;
+        margin: auto;
+        margin-top: 100px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        grid-gap: 30px
+    }
+
+    .product>div {
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 30px;
+    }
+
+    #sold,
+    #remove {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid red;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    #sold {
+        margin-left: 20px;
+         
+        color: white
+    }
+
+    #counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+        width: 100px;
+        height: 50px;
+        margin: auto;
+        font-weight: bolder;
+    }
+    #Admin{
+            margin-top: 50px;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            border: 1px solid blue;
+            cursor:pointer
+        }
+</style>
+
+<body>
+    <h1>Products</h1>
+    <button id="Admin">Go to Admin Dashboard</button>
+    <div id="counter"></div>
+    <div class="product"></div>
+</body>
+
+</html>
+
+<script>
+    var productData = JSON.parse(localStorage.getItem("Products")) || []
+
+    window.addEventListener("load", function () {
+        displayProduct(productData)
+    })
+    var count = document.getElementById("counter")
+    count.innerText = productData.length + " " + "items"
+    console.log(productData.length)
+    function displayProduct(productData) {
+        productData.map(function (el, index) {
+            var div = document.createElement("div")
+            var image = document.createElement("img")
+            image.src = el.image_url
+            var name = document.createElement("h2")
+            name.innerText = el.name
+            var price = document.createElement("p")
+            price.innerText = "₹" + el.price
+            var gender = document.createElement("p")
+            gender.innerText = el.gender
+            var rmvbtn = document.createElement("button")
+
+            rmvbtn.setAttribute("id", "remove")
+            rmvbtn.innerText = "Remove"
+            rmvbtn.addEventListener("click", function () {
+                removeFunction(el, index)
+            })
+            var soldbtn = document.createElement("button")
+            soldbtn.setAttribute("id", "sold")
+            if(el.sold=="False"){
+                soldbtn.style.backgroundColor="red"
+            }else{
+                soldbtn.style.backgroundColor="green"
+            }
+            soldbtn.innerText = "Sold"
+
+            soldbtn.addEventListener("click", function () {
+                soldFunction(el)
+            })
+            div.append(image, name, gender, price, rmvbtn, soldbtn)
+            document.querySelector(".product").append(div)
+        })
+    }
+    function removeFunction(el, index) {
+        productData.splice(index, 1)
+        localStorage.setItem("Products", JSON.stringify(productData));
+        window.location.reload()
+    }
+    function soldFunction(el) {
+        if (el.sold == "True") {
+            el.sold ="False"
+           
+            localStorage.setItem("Products", JSON.stringify(productData))
+           window.location.reload()
+        }
+        else {
+            el.sold = "True"
+           
+            localStorage.setItem("Products", JSON.stringify(productData))
+            window.location.reload()
+        }
+
+    }
+    document.querySelector("#Admin").addEventListener("click",productFunction)
+    function productFunction(){
+        window.location.href="index.html"
+    }
+</script>

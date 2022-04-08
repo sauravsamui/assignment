@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Object.create() and Function Construction</h1>
+</body>
+</html>
+
+ <script> 
+ //Object.create()
+ var automobile={
+    wheel:"4",
+    engine:"turbo",
+    company:"TATA",
+    gear:"6",
+}
+let truck1 = Object.create(automobile)
+truck1.color="red"
+truck1.price="2L"
+truck1.name="Ace"
+console.log(truck1)
+
+
+//Fuction constructor
+
+   function Autombiles(n,c,p){
+       this.name=n;
+       this.color=c;
+       this.price=p;
+       this.wheel ="4"
+       this.company="TATA"
+       this.gear="6"
+   }
+
+  let truck2 = new Autombiles("Ace","Red","2.5L")
+  truck2.engine="turbo"
+  console.log(truck2)
+</script>
