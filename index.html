@@ -26,18 +26,13 @@
            this[i] = arguments[i];
        }
     }
-    let a1 = new myArray("a","c","d","e")
-    console.log(Object.values(a1));
-     
     //creating custom .push()
      myArray.prototype.धकेलना=function(value){
          let index = this.length
          this[index] = value
          this.length++;
      }
-     a1.धकेलना("f")
-     console.log(Object.values(a1));
-
+    
     //creating custom .pop()
     myArray.prototype.पॉप=function(){
         let index = this.length-1;
@@ -45,23 +40,17 @@
         this.length--;
 
     }
-    a1.पॉप()
-    console.log(Object.values(a1));
-    a1.पॉप()
-    console.log(Object.values(a1));
 
      //creating custom .top()
      myArray.prototype.ऊपर= function(){
          let index = this.length-1
          console.log(this[index])
      }
-     a1.ऊपर()
 
      //creating custom .print()
      myArray.prototype.प्रिंट = function(){
          console.log(Object.values(this))
      }
-     a1.प्रिंट()
 
      //creating custom .printReverse()
      myArray.prototype.प्रिंटरिवर्स= function(){
@@ -73,11 +62,10 @@
          }
          console.log(Object.values(a3));
      }
-     a1.प्रिंटरिवर्स()
 
      //creating custom .size()
      myArray.prototype.आकार = function(){
          console.log(this.length)
      }
-     a1.आकार()
+  
 </script>
